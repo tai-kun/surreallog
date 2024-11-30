@@ -169,8 +169,8 @@ func initSurrealDB(db *sdb.SDB, opt *options) (*table, error) {
 		return nil, err
 	}
 
-	nsIdent := sdb.EscapeIdent(opt.ns)
-	dbIdent := sdb.EscapeIdent(opt.db)
+	nsIdent := sdb.QuoteIdent(opt.ns)
+	dbIdent := sdb.QuoteIdent(opt.db)
 	q := fmt.Sprintf(SETUP_QUERY_TEMPLATE, nsIdent, nsIdent, dbIdent, dbIdent)
 	r, err := db.Query(q, struct{}{})
 	if err != nil {
@@ -182,19 +182,20 @@ func initSurrealDB(db *sdb.SDB, opt *options) (*table, error) {
 		return nil, err
 	}
 
-	err = db.Use(opt.ns, opt.db)
-	if err != nil {
+	if err := db.Use(opt.ns, opt.db); err != nil {
 		return nil, err
 	}
 
-	ti := fmt.Sprintf(`#%d`, *i)
+	ti := strconv.Itoa(*i)
 	tb := &table{
-		rid:   sdb.EscapeRid(ti),
-		ident: sdb.EscapeIdent(ti),
+		rid:   sdb.QuoteRid(ti),
+		ident: sdb.QuoteIdent(ti),
 	}
-	q = fmt.Sprintf(DEFINE_TABLE_QUERY_TEMPLATE, tb.rid, tb.ident, tb.ident, tb.ident, tb.ident, tb.ident, tb.ident)
-	_, err = db.Query(q, struct{}{})
-	if err != nil {
+	q = fmt.Sprintf(
+		DEFINE_TABLE_QUERY_TEMPLATE,
+		tb.rid, tb.ident, tb.ident, tb.ident, tb.ident, tb.ident, tb.ident,
+	)
+	if _, err := db.Query(q, struct{}{}); err != nil {
 		return nil, err
 	}
 
@@ -203,9 +204,7 @@ func initSurrealDB(db *sdb.SDB, opt *options) (*table, error) {
 
 func getSurreal(opt *options) (*sdb.SDB, *table, error) {
 	db := &sdb.SDB{}
-
-	err := db.Connect(opt.endpoint)
-	if err != nil {
+	if err := db.Connect(opt.endpoint); err != nil {
 		return nil, nil, err
 	}
 
@@ -342,8 +341,7 @@ func (s *sender) flush() {
 		return
 	}
 
-	_, err := s.db.Query(s.q, &insertLinesQueryVars{s.buf})
-	if err != nil {
+	if _, err := s.db.Query(s.q, &insertLinesQueryVars{s.buf}); err != nil {
 		slog.Warn(err.Error())
 	} else {
 		slog.Debug("insert " + strconv.Itoa(l) + " line(s)")
@@ -578,13 +576,11 @@ func main() {
 	}
 
 	q := fmt.Sprintf(COMPLETE_QUERY_TEMPLATE, tb.rid)
-	_, err = db.Query(q, completeQueryVars{code})
-	if err != nil {
+	if _, err := db.Query(q, completeQueryVars{code}); err != nil {
 		slog.Error(err.Error())
 	}
 
-	err = db.Close()
-	if err != nil {
+	if err := db.Close(); err != nil {
 		slog.Error(err.Error())
 	}
 

@@ -76,7 +76,7 @@ spec:
 
 terminal(1):
 ```bash
-docker run --rm -p 8000:8000 --pull always surrealdb/surrealdb:latest start -u root -p root --strict
+docker run --rm --network host --pull always surrealdb/surrealdb:latest start -u root -p root --strict
 ```
 
 terminal(2):
@@ -105,7 +105,7 @@ terminal(2):
 
 terminal(2):
 ```bash
-> SELECT * FROM `#<table-number>` ORDER BY time
+> SELECT * FROM `<table-number>` ORDER BY time
 ```
 
 output:
@@ -113,79 +113,79 @@ output:
 -- Query 1 (execution time: 809.032µs)
 [
   {
-    id: ⟨#1⟩:wbq1pbm2bf0zsvchlpbb,
+    id: ⟨1⟩:wbq1pbm2bf0zsvchlpbb,
     time: d'2024-10-29T04:16:09.312794442Z',
     kind: 1,
     text: 'tick: 0tick: 1'
   },
   {
-    id: ⟨#1⟩:er5wupdnf1fc1w0gmytj,
+    id: ⟨1⟩:er5wupdnf1fc1w0gmytj,
     time: d'2024-10-29T04:16:10.316087122Z',
     kind: 1,
     text: 'tick: 2'
   },
   {
-    id: ⟨#1⟩:ek8mfru9g7b4mebyj9j2,
+    id: ⟨1⟩:ek8mfru9g7b4mebyj9j2,
     time: d'2024-10-29T04:16:12.322919475Z',
     kind: 1,
     text: 'tick: 3::add-mask::ichiro'
   },
   {
-    id: ⟨#1⟩:dt9p1j2ierun5lrgs7y2,
+    id: ⟨1⟩:dt9p1j2ierun5lrgs7y2,
     time: d'2024-10-29T04:16:12.322924944Z',
     kind: 1,
     text: 'ichiro'
   },
   {
-    id: ⟨#1⟩:zxhcuy8hpcdrktcugfpq,
+    id: ⟨1⟩:zxhcuy8hpcdrktcugfpq,
     time: d'2024-10-29T04:16:12.322949707Z',
     kind: 1,
     text: '1::add-mask::jiro'
   },
   {
-    id: ⟨#1⟩:9kjww7g41f99gbvv81ns,
+    id: ⟨1⟩:9kjww7g41f99gbvv81ns,
     time: d'2024-10-29T04:16:12.322959914Z',
     kind: 1,
     text: 'jiro'
   },
   {
-    id: ⟨#1⟩:su851z0athw7kxx4d5ip,
+    id: ⟨1⟩:su851z0athw7kxx4d5ip,
     time: d'2024-10-29T04:16:12.323092485Z',
     kind: 1,
     text: '***'
   },
   {
-    id: ⟨#1⟩:t1li4z1i9qv7ruwu2xt7,
+    id: ⟨1⟩:t1li4z1i9qv7ruwu2xt7,
     time: d'2024-10-29T04:16:12.323110499Z',
     kind: 1,
     text: '***'
   },
   {
-    id: ⟨#1⟩:oi0xm0dkg5z8cpppow22,
+    id: ⟨1⟩:oi0xm0dkg5z8cpppow22,
     time: d'2024-10-29T04:16:12.323116002Z',
     kind: 1,
     text: '***'
   },
   {
-    id: ⟨#1⟩:h3o2ylzcbag5n68tgi8y,
+    id: ⟨1⟩:h3o2ylzcbag5n68tgi8y,
     time: d'2024-10-29T04:16:12.323117460Z',
     kind: 1,
     text: ''
   },
   {
-    id: ⟨#1⟩:7y0tn648se32v881qyy9,
+    id: ⟨1⟩:7y0tn648se32v881qyy9,
     time: d'2024-10-29T04:16:12.323127736Z',
     kind: 1,
     text: '***'
   },
   {
-    id: ⟨#1⟩:xlb58383np79nalfxmy8,
+    id: ⟨1⟩:xlb58383np79nalfxmy8,
     time: d'2024-10-29T04:16:12.323132896Z',
     kind: 1,
     text: 'suzuki'
   },
   {
-    id: ⟨#1⟩:0h3q8q4a5xhcs5th5fid,
+    id: ⟨1⟩:0h3q8q4a5xhcs5th5fid,
     time: d'2024-10-29T04:16:12.323250386Z',
     kind: -1,
     text: 'error',
@@ -197,34 +197,34 @@ output:
     }
   },
   {
-    id: ⟨#1⟩:er6s0yiawy707o8wu6qx,
+    id: ⟨1⟩:er6s0yiawy707o8wu6qx,
     time: d'2024-10-29T04:16:12.323259386Z',
     kind: -1,
     text: 'debug',
     data: 'ichiro'
   },
   {
-    id: ⟨#1⟩:zi3jhpn8nc26lenegoe5,
+    id: ⟨1⟩:zi3jhpn8nc26lenegoe5,
     time: d'2024-10-29T04:16:12.323263457Z',
     kind: -1,
     text: 'debug',
     data: '***'
   },
   {
-    id: ⟨#1⟩:3gxfy57ue1kooa2vbmjf,
+    id: ⟨1⟩:3gxfy57ue1kooa2vbmjf,
     time: d'2024-10-29T04:16:12.323269769Z',
     kind: -1,
     text: 'group',
     data: 'title'
   },
   {
-    id: ⟨#1⟩:c11586dmkxuq3h54pzl5,
+    id: ⟨1⟩:c11586dmkxuq3h54pzl5,
     time: d'2024-10-29T04:16:12.323272532Z',
     kind: -1,
     text: 'endgroup'
   },
   {
-    id: ⟨#1⟩:ndtpjez3s2eb3d8hitpp,
+    id: ⟨1⟩:ndtpjez3s2eb3d8hitpp,
     time: d'2024-10-29T04:16:12.323274303Z',
     kind: -1,
     text: 'endgroup'
@@ -242,7 +242,7 @@ output:
 -- Query 1 (execution time: 222.835µs)
 [
   {
-    id: catalog:⟨#1⟩,
+    id: catalog:⟨1⟩,
     startedAt: d'2024-10-29T04:16:08.303656655Z',
     completedAt: d'2024-10-29T04:16:12.326835521Z',
     exitCode: 0

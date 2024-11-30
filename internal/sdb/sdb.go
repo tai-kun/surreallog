@@ -415,7 +415,7 @@ func escapeFullNumeric(str, left, right, escaped string) string {
 	return str
 }
 
-func EscapeRid(rid string) string {
+func QuoteRid(rid string) string {
 	if rid == "" {
 		return bracketL + bracketR
 	}
@@ -423,7 +423,7 @@ func EscapeRid(rid string) string {
 	return escapeFullNumeric(rid, bracketL, bracketR, bracketEsc)
 }
 
-func EscapeIdent(ident string) string {
+func QuoteIdent(ident string) string {
 	if ident == "" {
 		return backtick + backtick
 	}
